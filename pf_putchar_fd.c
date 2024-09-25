@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_error.c                                        :+:      :+:    :+:   */
+/*   pf_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlewicki <nlewicki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/25 15:29:06 by nlewicki          #+#    #+#             */
-/*   Updated: 2024/03/26 10:39:40 by nlewicki         ###   ########.fr       */
+/*   Created: 2024/03/22 10:47:04 by nlewicki          #+#    #+#             */
+/*   Updated: 2024/09/25 10:44:38 by nlewicki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	get_error(int status, int intial)
+int	pf_putchar_fd(char c, int fd)
 {
-	static int	error;
-
-	if (intial == 1)
-		error = 0;
-	if (error == -1)
-		return (-1);
-	else if (status < 0)
-		error = -1;
-	return (error);
+	if (get_error_printf (0, 0) == 0)
+		get_error_printf (write(fd, &c, 1), 0);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: nlewicki <nlewicki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 12:08:59 by nlewicki          #+#    #+#             */
-/*   Updated: 2024/03/27 11:21:04 by nlewicki         ###   ########.fr       */
+/*   Updated: 2024/09/25 10:47:50 by nlewicki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,24 @@ static int	ft_specifier(const char c, va_list arg)
 	{
 		str = va_arg(arg, char *);
 		if (str == NULL)
-			return (ft_putstr_fd("(null)", 1));
+			return (pf_putstr_fd("(null)", 1));
 		else
-			return (ft_putstr_fd(str, 1));
+			return (pf_putstr_fd(str, 1));
 	}
 	else if (c == 'd')
-		return (ft_putnbr_fd(va_arg(arg, int), 1));
+		return (pf_putnbr_fd(va_arg(arg, int), 1));
 	else if (c == 'c')
-		return (ft_putchar_fd(va_arg(arg, int), 1));
+		return (pf_putchar_fd(va_arg(arg, int), 1));
 	else if (c == 'i')
-		return (ft_putnbr_fd(va_arg(arg, int), 1));
+		return (pf_putnbr_fd(va_arg(arg, int), 1));
 	else if (c == 'x')
-		return (ft_putnbr_base(va_arg(arg, unsigned int), "0123456789abcdef"));
+		return (pf_putnbr_base(va_arg(arg, unsigned int), "0123456789abcdef"));
 	else if (c == 'X')
-		return (ft_putnbr_base(va_arg(arg, unsigned int), "0123456789ABCDEF"));
+		return (pf_putnbr_base(va_arg(arg, unsigned int), "0123456789ABCDEF"));
 	else if (c == 'u')
-		return (ft_putnbr_base(va_arg(arg, unsigned int), "0123456789"));
+		return (pf_putnbr_base(va_arg(arg, unsigned int), "0123456789"));
 	else if (c == '%')
-		return (ft_putchar_fd('%', 1));
+		return (pf_putchar_fd('%', 1));
 	return (0);
 }
 
@@ -53,11 +53,11 @@ static int	ft_format(const char c, va_list arg)
 	{
 		ptr = va_arg(arg, void *);
 		if (ptr == NULL)
-			return (ft_putstr_fd("0x0", 1));
+			return (pf_putstr_fd("0x0", 1));
 		else
 		{
-			ft_putstr_fd("0x", 1);
-			return (ft_putnbr_base((unsigned long long)ptr, str) + 2);
+			pf_putstr_fd("0x", 1);
+			return (pf_putnbr_base((unsigned long long)ptr, str) + 2);
 		}
 	}
 	else
@@ -74,7 +74,7 @@ int	ft_printf(const char *format, ...)
 	va_start(arg, format);
 	i = 0;
 	count = 0;
-	get_error(0, 1);
+	get_error_printf(0, 1);
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
@@ -85,8 +85,8 @@ int	ft_printf(const char *format, ...)
 			count += ft_format(format[i], arg);
 		}
 		else
-			count += ft_putchar_fd(format[i], 1);
-		if (get_error(0, 0) == -1)
+			count += pf_putchar_fd(format[i], 1);
+		if (get_error_printf(0, 0) == -1)
 			return (-1);
 		i++;
 	}

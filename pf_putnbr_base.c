@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*   pf_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlewicki <nlewicki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 10:47:58 by nlewicki          #+#    #+#             */
-/*   Updated: 2024/03/26 10:39:34 by nlewicki         ###   ########.fr       */
+/*   Updated: 2024/09/25 10:45:15 by nlewicki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	ft_is_zero(unsigned long long nbr, char *base, int *i, char *str)
 	}
 }
 
-int	ft_putnbr_base(unsigned long long nbr, char *base)
+int	pf_putnbr_base(unsigned long long nbr, char *base)
 {
 	size_t	base_size;
 	char	*str;
@@ -60,7 +60,7 @@ int	ft_putnbr_base(unsigned long long nbr, char *base)
 		base_size++;
 	str = (char *)malloc(sizeof(char) * (base_size + 1));
 	if (str == NULL)
-		return (get_error(-1, 0));
+		return (get_error_printf(-1, 0));
 	i = 0;
 	ft_is_zero(nbr, base, &i, str);
 	while (nbr > 0)
@@ -69,7 +69,7 @@ int	ft_putnbr_base(unsigned long long nbr, char *base)
 		nbr /= base_size;
 	}
 	while (i > 0)
-		count += ft_putchar_fd(str[--i], 1);
+		count += pf_putchar_fd(str[--i], 1);
 	free(str);
 	return (count);
 }

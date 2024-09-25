@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   pf_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nlewicki <nlewicki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 10:46:34 by nlewicki          #+#    #+#             */
-/*   Updated: 2024/03/26 10:39:38 by nlewicki         ###   ########.fr       */
+/*   Created: 2024/03/22 10:47:28 by nlewicki          #+#    #+#             */
+/*   Updated: 2024/09/25 10:45:50 by nlewicki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putstr_fd(char *s, int fd)
+int	pf_putnbr_fd(int n, int fd)
 {
-	int	i;
+	char	c;
+	int		count;
 
-	i = 0;
-	while (s[i] != '\0')
+	count = 0;
+	if (n == -2147483648)
+		return (pf_putstr_fd("-2147483648", fd));
+	if (n < 0)
 	{
-		ft_putchar_fd(s[i], fd);
-		i++;
+		pf_putchar_fd('-', fd);
+		count++;
+		n = -n;
 	}
-	return (i);
+	if (n > 9)
+		count += pf_putnbr_fd(n / 10, fd);
+	c = n % 10 + '0';
+	pf_putchar_fd(c, fd);
+	count++;
+	return (count);
 }

@@ -6,7 +6,7 @@
 /*   By: nlewicki <nlewicki@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 11:17:34 by nlewicki          #+#    #+#             */
-/*   Updated: 2024/03/27 11:21:06 by nlewicki         ###   ########.fr       */
+/*   Updated: 2024/09/25 10:44:17 by nlewicki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 # include <limits.h>
 # include <ctype.h>
 
-int		ft_putchar_fd(char c, int fd);
-int		ft_putstr_fd(char *s, int fd);
-int		ft_putnbr_fd(int n, int fd);
-int		ft_putnbr_base(unsigned long long n, char *base);
+int		pf_putchar_fd(char c, int fd);
+int		pf_putstr_fd(char *s, int fd);
+int		pf_putnbr_fd(int n, int fd);
+int		pf_putnbr_base(unsigned long long n, char *base);
 int		ft_printf(const char *format, ...);
-int		get_error(int status, int intial);
+int		get_error_printf(int status, int intial);
 
 #endif
